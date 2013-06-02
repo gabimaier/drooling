@@ -1,0 +1,56 @@
+Warehouse
+===========
+- [] Driver
+- [] Product
+- [] Truck
+- Location
+
+Truck
+==============
+- Driver
+- [] Product
+- fuel amount
+- Engine
+- license plate
+- Location
+
+Driver
+======
+- driving hours today
+- name
+
+Product
+=======
+- name
+- profit
+
+Engine
+======
+- fuel consumption /100km
+	uphill
+	flat		//flat non urban
+	urban
+- max speed
+	uphill		//min(legal, ...)
+	flat
+	urban
+
+Location
+========
+- x
+- y
+
+
+Order
+=====
+- [] Product - Quantity		//hashmap
+- Location
+
+Driving_Route
+=============
+- km uphill
+- km flat
+- km urban
+- km highway
+
+

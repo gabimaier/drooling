@@ -1,0 +1,11 @@
+/**********
+Given a new order arrives:
+- select (warehouse, product, driver) for order
+- update actor statuses
+- update costs & profits
+*******/
+
+
+/********* selection ********
+******/
+
