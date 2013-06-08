@@ -6,6 +6,7 @@ import java.util.Set;
 import loan.advisor.constants.Country;
 import loan.advisor.dto.LoanType;
 import loan.advisor.dto.Person;
+import loan.advisor.services.FeedbackService;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
@@ -25,20 +26,26 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		final FeedbackService fs = new FeedbackService();
+		
 		try {
 			// load up the knowledge base
 			KnowledgeBase kbase = readKnowledgeBase();
 			StatefulKnowledgeSession ksession = kbase
 					.newStatefulKnowledgeSession();
 			KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory
-					.newFileLogger(ksession, "test");
+					.newFileLogger(ksession, "loanAdvisor");
 			// go !
+			ksession.setGlobal("feedbackService", fs);
 			populateSession(ksession);
 			ksession.fireAllRules();
+			
 			logger.close();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println(fs.getFeedback());
 	}
 
 	private static KnowledgeBase readKnowledgeBase() throws Exception {

@@ -75,12 +75,12 @@
   <type>4</type>
   <activationId>Valid for loan [2, 7]</activationId>
   <rule>Valid for loan</rule>
-  <declarations>$name=Jane Miller(2); $loan=loan.advisor.dto.LoanType@1473ec7(7)</declarations>
+  <declarations>$name=Jane Miller(2); $loan=loan.advisor.dto.LoanType@13a6832(7)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ObjectLogEvent>
   <type>1</type>
   <factId>7</factId>
-  <objectToString>loan.advisor.dto.LoanType@1473ec7</objectToString>
+  <objectToString>loan.advisor.dto.LoanType@13a6832</objectToString>
 </org.drools.audit.event.ObjectLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>4</type>
@@ -122,12 +122,12 @@
   <type>4</type>
   <activationId>Valid for loan [4, 8]</activationId>
   <rule>Valid for loan</rule>
-  <declarations>$name=Mike Morrison(4); $loan=loan.advisor.dto.LoanType@17dec37(8)</declarations>
+  <declarations>$name=Mike Morrison(4); $loan=loan.advisor.dto.LoanType@1c2074c(8)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ObjectLogEvent>
   <type>1</type>
   <factId>8</factId>
-  <objectToString>loan.advisor.dto.LoanType@17dec37</objectToString>
+  <objectToString>loan.advisor.dto.LoanType@1c2074c</objectToString>
 </org.drools.audit.event.ObjectLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>4</type>
@@ -174,7 +174,7 @@
 <org.drools.audit.event.ObjectLogEvent>
   <type>1</type>
   <factId>9</factId>
-  <objectToString>loan.advisor.dto.LoanType@1f4fc08</objectToString>
+  <objectToString>loan.advisor.dto.LoanType@3af348</objectToString>
 </org.drools.audit.event.ObjectLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>6</type>
@@ -287,13 +287,13 @@
   <type>6</type>
   <activationId>Valid for loan [4, 8]</activationId>
   <rule>Valid for loan</rule>
-  <declarations>$name=Mike Morrison(4); $loan=loan.advisor.dto.LoanType@17dec37(8)</declarations>
+  <declarations>$name=Mike Morrison(4); $loan=loan.advisor.dto.LoanType@1c2074c(8)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>7</type>
   <activationId>Valid for loan [4, 8]</activationId>
   <rule>Valid for loan</rule>
-  <declarations>$name=Mike Morrison(4); $loan=loan.advisor.dto.LoanType@17dec37(8)</declarations>
+  <declarations>$name=Mike Morrison(4); $loan=loan.advisor.dto.LoanType@1c2074c(8)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>6</type>
@@ -359,13 +359,13 @@
   <type>6</type>
   <activationId>Valid for loan [2, 7]</activationId>
   <rule>Valid for loan</rule>
-  <declarations>$name=Jane Miller(2); $loan=loan.advisor.dto.LoanType@1473ec7(7)</declarations>
+  <declarations>$name=Jane Miller(2); $loan=loan.advisor.dto.LoanType@13a6832(7)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>7</type>
   <activationId>Valid for loan [2, 7]</activationId>
   <rule>Valid for loan</rule>
-  <declarations>$name=Jane Miller(2); $loan=loan.advisor.dto.LoanType@1473ec7(7)</declarations>
+  <declarations>$name=Jane Miller(2); $loan=loan.advisor.dto.LoanType@13a6832(7)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>6</type>

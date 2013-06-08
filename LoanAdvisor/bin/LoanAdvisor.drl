@@ -1,12 +1,10 @@
-//created on: Jun 8, 2013
 package loan.advisor.drl
-
-//list any import classes here.
 
 import loan.advisor.dto.Person
 import loan.advisor.dto.LoanType
+import loan.advisor.services.FeedbackService
 
-//declare any global variables here
+global FeedbackService feedbackService
 
 
 rule "Underage Persons"
@@ -14,45 +12,45 @@ rule "Underage Persons"
     when
         $person: Person(age < 18)
     then
-    	System.out.printf("%S, you have to grow up first!\n", $person.getName());
+    	feedbackService.addFeedback($person, 
+    		String.format("You have to grow up first!"));
     	retract($person);
 end
 
 rule "Above maximum age limit"
     when
     	LoanType($loanName: name, $maxAge: maxAge)
-        Person(age > $maxAge, $persName: name)
+        $person: Person(age > $maxAge)
     then
-        System.out.printf("%S, you do NOT qualify for '%s': you are older than %d.\n", 
-        	$persName, $loanName, $maxAge);
+    	feedbackService.addFeedback($person,
+    		String.format("You do NOT qualify for '%s': you are older than %d.", $loanName, $maxAge));
 end
 
 rule "Bellow minimum income"
     when
     	LoanType($loanName: name, $minIncome: minIncome)
-        Person(income < $minIncome, $persName: name)
+        $person: Person(income < $minIncome)
     then
-        System.out.printf("%S, you do NOT qualify for '%s': you earn less than %,.2f €.\n", 
-        	$persName, $loanName, $minIncome);
+        feedbackService.addFeedback($person,
+    		String.format("You do NOT qualify for '%s': you earn less than %,.2f €.", $loanName, $minIncome));
 end
 
 rule "Invalid citizenship"
     when
     	LoanType($loanName: name, $compatibleCitizenships: compatibleCitizenships)
-        Person(!$compatibleCitizenships.contains(citizenship), $persName: name)
+        $person: Person(!$compatibleCitizenships.contains(citizenship))
     then
-        System.out.printf("%S, you do NOT qualify for '%s': this loan is available only in %s .\n", 
-        	$persName, $loanName, $compatibleCitizenships.toString());
+        feedbackService.addFeedback($person,
+    		String.format("You do NOT qualify for '%s': this loan is available only in %s .", $loanName, $compatibleCitizenships.toString()));
 end
 
 rule "Valid for loan"
 	when
 		$loan: LoanType()
-		Person(age >= 18, age <= $loan.getMaxAge(), 
+		$person: Person(age >= 18, age <= $loan.getMaxAge(), 
 			income >= $loan.getMinIncome(),
-			$loan.getCompatibleCitizenships().contains(citizenship),
-			$name: name	)
+			$loan.getCompatibleCitizenships().contains(citizenship))
 	then
-		System.out.printf("%S, you qualify for '%s'! One of our agents will contact you shortly.\n",
-			$name, $loan.getName());
+		feedbackService.addFeedback($person,
+    		String.format("You qualify for '%s'! One of our agents will contact you shortly.", $loan.getName()));
 end
