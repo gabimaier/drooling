@@ -19,7 +19,7 @@ end
 
 rule "Above maximum age limit"
     when
-    	LoanType($loanName: name, $maxAge: maxAge)
+    	LoanType(active==true, $loanName: name, $maxAge: maxAge)
         $person: Person(age > $maxAge)
     then
     	feedbackService.addFeedback($person,
@@ -28,7 +28,7 @@ end
 
 rule "Bellow minimum income"
     when
-    	LoanType($loanName: name, $minIncome: minIncome)
+    	LoanType(active==true, $loanName: name, $minIncome: minIncome)
         $person: Person(income < $minIncome)
     then
         feedbackService.addFeedback($person,
@@ -37,8 +37,8 @@ end
 
 rule "Invalid citizenship"
     when
-    	LoanType($loanName: name, $compatibleCitizenships: compatibleCitizenships)
-        $person: Person(!$compatibleCitizenships.contains(citizenship))
+    	LoanType(active==true, $loanName: name, $compatibleCitizenships: compatibleCitizenships)
+        $person: Person($compatibleCitizenships not contains citizenship)
     then
         feedbackService.addFeedback($person,
     		String.format("You do NOT qualify for '%s': this loan is available only in %s .", $loanName, $compatibleCitizenships.toString()));
@@ -46,10 +46,10 @@ end
 
 rule "Valid for loan"
 	when
-		$loan: LoanType()
-		$person: Person(age >= 18, age <= $loan.getMaxAge(), 
-			income >= $loan.getMinIncome(),
-			$loan.getCompatibleCitizenships().contains(citizenship))
+		$loan: LoanType(active==true)
+		$person: Person(age >= 18, age <= $loan.maxAge,				//uses the getter 
+			income >= $loan.minIncome,
+			$loan.compatibleCitizenships contains citizenship)		//only on Collections
 	then
 		feedbackService.addFeedback($person,
     		String.format("You qualify for '%s'! One of our agents will contact you shortly.", $loan.getName()));

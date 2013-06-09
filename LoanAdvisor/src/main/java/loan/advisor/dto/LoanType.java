@@ -9,13 +9,16 @@ public class LoanType {
 	private Integer maxAge;
 	private Set<Country> compatibleCitizenships;
 	private Double minIncome;
+	private boolean active;
 
 	public LoanType(String name, Integer maxAge,
-			Set<Country> compatibleCitizenships, double minIncome) {
+			Set<Country> compatibleCitizenships, double minIncome,
+			boolean isActive) {
 		this.name = name;
 		this.maxAge = maxAge;
 		this.compatibleCitizenships = compatibleCitizenships;
 		this.minIncome = minIncome;
+		this.active = isActive;
 	}
 
 	public String getName() {
@@ -49,4 +52,13 @@ public class LoanType {
 	public void setMinIncome(Double minIncome) {
 		this.minIncome = minIncome;
 	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean isActive) {
+		this.active = isActive;
+	}
+
 }

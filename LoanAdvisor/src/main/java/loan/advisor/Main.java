@@ -30,7 +30,8 @@ public class Main {
 		
 		try {
 			// load up the knowledge base
-			KnowledgeBase kbase = readKnowledgeBase();
+			KnowledgeBase kbase = //readDrlKnowledgeBase();
+					readDslKnowledgeBase();
 			StatefulKnowledgeSession ksession = kbase
 					.newStatefulKnowledgeSession();
 			KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory
@@ -48,11 +49,30 @@ public class Main {
 		System.out.println(fs.getFeedback());
 	}
 
-	private static KnowledgeBase readKnowledgeBase() throws Exception {
+	private static KnowledgeBase readDrlKnowledgeBase() throws Exception {
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
 				.newKnowledgeBuilder();
 		kbuilder.add(ResourceFactory.newClassPathResource("LoanAdvisor.drl"),
 				ResourceType.DRL);
+		KnowledgeBuilderErrors errors = kbuilder.getErrors();
+		if (errors.size() > 0) {
+			for (KnowledgeBuilderError error : errors) {
+				System.err.println(error);
+			}
+			throw new IllegalArgumentException("Could not parse knowledge.");
+		}
+		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+		return kbase;
+	}
+	
+	private static KnowledgeBase readDslKnowledgeBase() throws Exception {
+		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
+				.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory.newClassPathResource("dictionary.dsl"),
+				ResourceType.DSL);
+		kbuilder.add(ResourceFactory.newClassPathResource("LoanAdvisor.dslr"),
+				ResourceType.DSLR);
 		KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		if (errors.size() > 0) {
 			for (KnowledgeBuilderError error : errors) {
@@ -78,11 +98,12 @@ public class Main {
 		compatibleCitizenships.add(Country.France);
 
 		ksession.insert(new LoanType("The Standard Credit", 65, compatibleCitizenships,
-				90000));
+				90000, true));
 		ksession.insert(new LoanType("The Platinum Credit", 80, compatibleCitizenships,
-				190000));
+				190000, true));
 		ksession.insert(new LoanType("The Student Loan", 23, compatibleCitizenships,
-				25000));
-
+				25000, true));
+		ksession.insert(new LoanType("The Poor Student Loan", 20, compatibleCitizenships,
+				12000, false));
 	}
 }
