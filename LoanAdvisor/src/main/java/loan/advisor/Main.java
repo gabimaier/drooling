@@ -30,7 +30,8 @@ public class Main {
 		
 		try {
 			// load up the knowledge base
-			KnowledgeBase kbase = //readDrlKnowledgeBase();
+			KnowledgeBase kbase = 
+					//readDrlKnowledgeBase();
 					readDslKnowledgeBase();
 			StatefulKnowledgeSession ksession = kbase
 					.newStatefulKnowledgeSession();

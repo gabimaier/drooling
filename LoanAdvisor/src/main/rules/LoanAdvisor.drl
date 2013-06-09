@@ -6,14 +6,12 @@ import loan.advisor.services.FeedbackService
 
 global FeedbackService feedbackService
 
-
 rule "Underage Persons"
 	salience 100			//filter out the kids first
     when
         $person: Person(age < 18)
     then
-    	feedbackService.addFeedback($person, 
-    		String.format("You have to grow up first!"));
+    	feedbackService.addFeedback($person, "You have to grow up first!");
     	retract($person);
 end
 
