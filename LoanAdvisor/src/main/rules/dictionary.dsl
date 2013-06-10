@@ -9,7 +9,7 @@
 [when]- earns more than or equal to the minimum income for the loan=income >= $loan.minIncome
 [when]- has compatible citizenship with the loan=$loan.compatibleCitizenships contains citizenship
 
-[then]Tell that person they qualify for the loan=System.out.println($person.getName() + ", you qualify for " + $loan.getName());
-[then]Tell that person they do not qualify because of {reason}=System.out.println($person.getName() + ", you do NOT qualify for " + $loan.getName() + " because of the "+{reason});
-[then]Tell that person {message}=System.out.println($person.getName() + ", " + {message});
 [then]Exclude that person=retract($person);
+[then]Use {feedbackService} to tell that person {message}=feedbackService.addFeedback($person, {message});
+[then]Use {feedbackService} to give this negative feedback {message}=feedbackService.addFeedback($person, String.format("You do NOT qualify for '%s': %s", $loan.getName(), {message}));
+[then]Use {feedbackService} to give positive feedback=feedbackService.addFeedback($person, String.format("You qualify for '%s'! One of our agents will contact you shortly.", $loan.getName()));

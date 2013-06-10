@@ -57,8 +57,8 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return String.format("%S, aged %d, citizen of %s, yearly income of %,.2f €",
-				name, age, citizenship, income);
+		return String.format("%S, aged %d, citizen of %s, yearly income of %,.2f %c",
+				name, age, citizenship, income, 8364);
 	}
 
 	@Override

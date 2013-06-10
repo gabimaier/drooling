@@ -31,8 +31,8 @@ public class Main {
 		try {
 			// load up the knowledge base
 			KnowledgeBase kbase = 
-					readDrlKnowledgeBase();
-					//readDslKnowledgeBase();
+					//readDrlKnowledgeBase();
+					readDslKnowledgeBase();
 			StatefulKnowledgeSession ksession = kbase
 					.newStatefulKnowledgeSession();
 			KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory

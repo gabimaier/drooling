@@ -13,7 +13,7 @@ rule "Underage Persons"
     when
         There is a person younger than 18
     then
-    	Tell that person "you have to grow up first!"
+    	Use feedbackService to tell that person "you have to grow up first!"
     	Exclude that person
 end
 
@@ -22,7 +22,7 @@ rule "Above maximum age limit"
     	For an active loan type
         A person is too old
     then
-    	Tell that person they do not qualify because of "maximum age limit"
+    	Use feedbackService to give this negative feedback "you exceed the maximum age limit"
 end
 
 rule "Bellow minimum income"
@@ -30,7 +30,7 @@ rule "Bellow minimum income"
     	For an active loan type
         A person earns too little
     then
-    	Tell that person they do not qualify because of "minimum income limit"
+    	Use feedbackService to give this negative feedback "your income is bellow the minimum limit"
 end
 
 rule "Invalid citizenship"
@@ -38,7 +38,7 @@ rule "Invalid citizenship"
     	For an active loan type
     	A person is of incompatible citizenship
     then
-        Tell that person they do not qualify because of "incompatible citizenship"
+        Use feedbackService to give this negative feedback "you do not have a copmatible citizenship"
 end
 
 rule "Valid for loan"
@@ -50,5 +50,5 @@ rule "Valid for loan"
 		- earns more than or equal to the minimum income for the loan
 		- has compatible citizenship with the loan
 	then
-		Tell that person they qualify for the loan
+		Use feedbackService to give positive feedback
 end
